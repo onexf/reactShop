@@ -7,12 +7,13 @@
     "test": "jest"
   },
   "dependencies": {
+    "crypto-js": "^3.1.9-1",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",
     "react-native-baidu-map": "0.5.1",
     "react-native-router-flux": "3.39.1",
     "react-native-storage": "^0.2.0",
-    "react-native-swiper":"1.5.4"
+    "react-native-swiper": "1.5.4"
   },
   "devDependencies": {
     "babel-jest": "20.0.3",

@@ -1,2 +1,2 @@
 # reactShop
-基于react-native的一个商城demo
+a shop program wirte with React-native 

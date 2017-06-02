@@ -16,14 +16,14 @@ const ScreenWidth = Dimensions.get('window').width;
 
 class ShopHome extends Component {
   constructor(props) {
-    super(props); 
+    super(props);
     images = ['http://avatar.csdn.net/8/6/0/1_jing85432373.jpg','http://avatar.csdn.net/8/6/0/1_jing85432373.jpg','http://avatar.csdn.net/8/6/0/1_jing85432373.jpg'];
   }
   requestHomeData (){
-    global.network.getHomeData('/getpicture',{'pictureid':'0','height':'800'},(responseData)=>{
-        // console.log('requestSuccess',responseData.data);
+    global.network.getData('NO44',{},(responseData)=>{
+        console.log('requestSuccess',responseData);
     },(error)=>{
-      // console.log('requestFail',error);
+      console.log('requestFail',error);
     });
   }
 
@@ -36,13 +36,13 @@ class ShopHome extends Component {
   render() {
     return (
       <View style={styles.container}>
-          <Swiper style={styles.swaper}  
-            height={ScreenWidth * 3 / 4} 
-            width={ScreenWidth}  
-            horizontal={true} 
-            loop={true} 
-            index={0} 
-            autoplay={true}         
+          <Swiper style={styles.swaper}
+            height={ScreenWidth * 3 / 4}
+            width={ScreenWidth}
+            horizontal={true}
+            loop={true}
+            index={0}
+            autoplay={true}
             dot={<View style={styles.doitNormal} />}
             activeDot={<View style={styles.doitSelect} />}
             paginationStyle={[styles.paginStlye,{marginLeft:ScreenWidth - (images.length * 10 + 15),
@@ -58,19 +58,19 @@ class ShopHome extends Component {
 
       }
 
-      renderImg(){  
-            var imageViews=[];  
-            for(var i=0;i<images.length;i++){  
-                imageViews.push(  
-                    <Image  
-                        key={i}  
-                        style={{flex:1}}  
-                        source={{uri:images[i]}}  
-                        />  
-                );  
-            }  
-            return imageViews;  
-        }  
+      renderImg(){
+            var imageViews=[];
+            for(var i=0;i<images.length;i++){
+                imageViews.push(
+                    <Image
+                        key={i}
+                        style={{flex:1}}
+                        source={{uri:images[i]}}
+                        />
+                );
+            }
+            return imageViews;
+        }
 }
 
 const styles = StyleSheet.create({
@@ -82,13 +82,13 @@ const styles = StyleSheet.create({
       backgroundColor: 'red',
       width: 5,
       height: 5,
-      borderRadius: 4, 
+      borderRadius: 4,
       marginLeft: 3,
       marginRight: 3,
-      marginTop: 3, 
+      marginTop: 3,
       marginBottom: 3
   },
-  
+
   doitSelect:{
     backgroundColor: 'yellow',
     width: 8,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor:'rgba(0,0,0,0.3)',
   },
   banner:{
-    
+
   },
    slide1: {
     flex: 1,

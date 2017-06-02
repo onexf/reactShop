@@ -21,7 +21,7 @@ const ScreenWidth = Dimensions.get('window').width;
 
 class Home extends Component {
   constructor(props) {
-    super(props); 
+    super(props);
     var ds =new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     iconImgArr = [require('../../Image/homepage_list_1.png'),require('../../Image/homepage_list_2.png'),require('../../Image/homepage_list_3.png'),require('../../Image/homepage_list_4.png')];
     iconTitleArr = ['商城首页','发现','待收货','我的钱包'];
@@ -29,10 +29,11 @@ class Home extends Component {
     bannerImgArr = ['http://avatar.csdn.net/8/6/0/1_jing85432373.jpg','http://avatar.csdn.net/8/6/0/1_jing85432373.jpg','http://avatar.csdn.net/8/6/0/1_jing85432373.jpg'];
   }
   requestHomeData (){
-    global.network.getHomeData('/getpicture',{'pictureid':'0','height':'800'},(responseData)=>{
-        // console.log('requestSuccess',responseData.data);
+
+    global.network.getData('N044',{},(responseData)=>{
+        console.log('requestSuccess',responseData);
     },(error)=>{
-      // console.log('requestFail',error);
+      console.log('requestFail',error);
     });
   }
   componentDidMount() {
@@ -41,13 +42,13 @@ class Home extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-          <Swiper style={styles.swaper}  
-            height={ScreenWidth * 3 / 4} 
-            width={ScreenWidth}  
-            horizontal={true} 
-            loop={true} 
-            index={0} 
-            autoplay={true}         
+          <Swiper style={styles.swaper}
+            height={ScreenWidth * 3 / 4}
+            width={ScreenWidth}
+            horizontal={true}
+            loop={true}
+            index={0}
+            autoplay={true}
             dot={<View style={styles.doitNormal} />}
             activeDot={<View style={styles.doitSelect} />}
             paginationStyle={[styles.paginStlye,{marginLeft:ScreenWidth - (bannerImgArr.length * 10 + 15),
@@ -55,10 +56,10 @@ class Home extends Component {
             >
             {this.renderImg()}
           </Swiper>
-          <View style={styles.iconBackView}> 
+          <View style={styles.iconBackView}>
             {this.iconViews()}
           </View>
-          {this.creatBestSellerListView()}
+
       </ScrollView>
     );
   }
@@ -74,32 +75,32 @@ class Home extends Component {
             Actions.findHome();
           }
       }
-      creatBestSellerListView(){
-        return (
-          <ListView 
-            dataSource={this.activeDataArr}
-            renderRow={(rowData)=> }
-          />
-    
-          );
+      // creatBestSellerListView(){
+      //   return (
+      //     <ListView
+      //       dataSource={this.activeDataArr}
+      //       renderRow={(rowData)=>{} }
+      //     />
+      //
+      //     );
+      //
+      // }
 
-      }
-      
-      renderImg(){  
-            var imageViews=[];  
-            for(let i=0;i<bannerImgArr.length;i++){  
-                imageViews.push( 
-                <TouchableWithoutFeedback key={i} onPress={()=>{this.itemTouched(i)}}> 
-                    <Image  
-                        key={i}  
-                        style={{flex:1}}  
-                        source={{uri:bannerImgArr[i]}}  
-                        />  
+      renderImg(){
+            var imageViews=[];
+            for(let i=0;i<bannerImgArr.length;i++){
+                imageViews.push(
+                <TouchableWithoutFeedback key={i} onPress={()=>{this.itemTouched(i)}}>
+                    <Image
+                        key={i}
+                        style={{flex:1}}
+                        source={{uri:bannerImgArr[i]}}
+                        />
                 </TouchableWithoutFeedback>
-                );  
-            }  
-            return imageViews;  
-        }  
+                );
+            }
+            return imageViews;
+        }
 
       iconViews(){
           var iconImageViewsArr = [];
@@ -132,13 +133,13 @@ const styles = StyleSheet.create({
       backgroundColor: 'red',
       width: 5,
       height: 5,
-      borderRadius: 4, 
+      borderRadius: 4,
       marginLeft: 3,
       marginRight: 3,
-      marginTop: 3, 
+      marginTop: 3,
       marginBottom: 3
   },
-  
+
   doitSelect:{
     backgroundColor: 'yellow',
     width: 8,
@@ -150,13 +151,13 @@ const styles = StyleSheet.create({
     backgroundColor:'rgba(0,0,0,0.3)',
   },
   banner:{
-    
+
   },
-  
+
   iconView:{
       width:54,
       height:54,
-      
+
   },
   iconText:{
     fontSize:14,

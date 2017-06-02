@@ -20,24 +20,6 @@ class ShoppingCart extends Component {
   constructor(props) {
 
     super(props);
-
-    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    var cartData = [];
-    global.storage.load({key:'cart'}).then(ret =>{
-      cartData = ret;
-      this.setState({
-        data:ds.cloneWithRows(cartData)
-      });
-      this.reloadData();
-    })
-
-    this.state = {
-      data: ds.cloneWithRows(cartData),
-      selectAll:false,
-      totalMoney:0,
-    };
-  }
-  componentWillMount() {
     Actions.refresh({
         leftTitle:'重置',
         onLeft:()=>{
@@ -55,7 +37,23 @@ class ShoppingCart extends Component {
           })
         }
     });
+    var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    var cartData = [];
+    global.storage.load({key:'cart'}).then(ret =>{
+      cartData = ret;
+      this.setState({
+        data:ds.cloneWithRows(cartData)
+      });
+      this.reloadData();
+    })
+
+    this.state = {
+      data: ds.cloneWithRows(cartData),
+      selectAll:false,
+      totalMoney:0,
+    };
   }
+
   plus(item){
     item.item.count++;
     this.reloadData();

@@ -8,33 +8,53 @@ import {
 } from 'react-native';
 
 class NetTool extends Component {
-    editParams (params){
+    editParams (params,api){
       var finalParams = {};
       var radomStr = this.net_genRandomString();
       var timeStamp = this.net_getTimeStamp();
       var requestDataString = JSON.stringify(params);
 
-      finalParams['methodId'] = params['methodId'];
+      finalParams['methodId'] = api;
       finalParams['methodParam'] = requestDataString;
       finalParams['nonce'] = radomStr;
       finalParams['timestamp'] = timeStamp;
-      finalParams["appid"] = "RN";
+      finalParams["appid"] = global.device.isAndroid()?"ANDROID":"IOS";
       finalParams["appkey"] = "innjia2016111701";
       var sign = this.signParama(finalParams);
       finalParams["signature"] = sign;
+      var string = "";
+      var keysArr = Object.keys(finalParams);
 
-      // reqParam["signature"] =
-      console.log(radomStr,timeStamp,requestDataString);
-      return params;
+      for (var i = 0; i < keysArr.length; i++) {
+        var key = keysArr[i];
+        var value = finalParams[key];
+        string += "&";
+        string += key;
+        string += "=";
+        string += value;
+      }
+      string = string.substring(1);
+      return string;
     }
+
     signParama(params){
-        var keysArr = Object.keys(params).sort();
-        for (var i = 0; i < keysArr.length; i++) {
-          var key = keysArr[i];
-          var value = params[key];
-          
-        }
-        return "";
+      var string = "";
+      var keysArr = Object.keys(params).sort();
+      for (var i = 0; i < keysArr.length; i++) {
+        var key = keysArr[i];
+        var value = params[key];
+        string += "&";
+        string += key;
+        string += "=";
+        string += value;
+      }
+      string += "&key=innjia2016111701";
+      string = string.substring(1);
+      var MD5 = require("crypto-js/md5");
+      string = MD5(string,{ asString: true });
+      string += "";
+      string = string.toUpperCase();
+      return string;
     }
     net_genRandomString(){
       var date = new Date();

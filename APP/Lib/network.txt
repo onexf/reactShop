@@ -1,0 +1,18 @@
+网络类用法，目前都是post
+global.network.getData(参数1,参数2,参数3,参数4)
+
+参数1:.net的uip的methodId。例如"N001","J001","001","6001"
+参数2:需要传入的参数，以object字典方式传入,例如{"isNeedUpdate":"1","openId":"testettststet"}，没参数的话传{}
+参数3:成功回调，回传数据, 例如 (responseData)=>{
+    处理成功代码
+}
+参数4:失败回调，回传错误msg, 例如 (error)=>{
+    处理失败代码
+}
+
+例子:
+global.network.getData('N044',{},(responseData)=>{
+    console.log('requestSuccess',responseData);
+},(error)=>{
+  console.log('requestFail',error);
+});

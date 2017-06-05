@@ -77,9 +77,9 @@ export default class Root extends Component {
            <Scene key = "tabbar" initial tabs={true}  tabBarStyle = {styles.tabbarColor}>
              <Scene key = 'item1' title = '首页' icon = {TabbarItem} hideNavBar>
                <Scene key="homepage" component={Home} title="首页"/>
-               <Scene key="shophome" component={ShopHome} title="商城" hideNavBar={false}/>
-               <Scene key="goodsDetail" component={GoodsDetail} title="商品详情" hideNavBar={false}/>
-               <Scene key="findHome" component={FindHome} title="发现" hideNavBar={false}/>
+               <Scene key="shophome" component={ShopHome} title="商城" hideTabBar hideNavBar={false}/>
+               <Scene key="goodsDetail" component={GoodsDetail} title="商品详情" hideTabBar hideNavBar={false}/>
+               <Scene key="findHome" component={FindHome} title="发现" hideTabBar hideNavBar={false}/>
              </Scene>
              <Scene key = 'item2' title = '发现' icon = {TabbarItem} navigationBarStyle = {styles.navBarColor}>
                <Scene key="发现" component={Second} title="发现" titleStyle={styles.title}/>

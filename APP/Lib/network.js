@@ -1,6 +1,7 @@
 import{Component} from'react';
 import NetTool from './netTool.js'
-let HOST = 'http://testuip.innjia.com/test/api/innjiauip/';
+// let HOST = 'http://testuip.innjia.com/test/api/innjiauip/';
+let HOST = 'https://uip.innjia.com/api/InnjiaUIP/';
 
 
 export default class Network extends Component {
@@ -13,11 +14,11 @@ export default class Network extends Component {
   //successHander:成功回调 成功回传数据
   //failHander:失败回调 失败回传msg
   getData(api,params,successHander,failHander){
-      fetchData1(HOST,api,params,'POST',successHander,failHander);
+      fetchDataFromNet(HOST,api,params,'POST',successHander,failHander);
   }
 }
 
-const fetchData1 = (host,api,params,method,successHander,failHander)=>{
+const fetchDataFromNet = (host,api,params,method,successHander,failHander)=>{
 
   params = this.network.netTool.editParams(params,api);
    if (method == 'GET')
@@ -132,6 +133,7 @@ const dealWithOldSuccessResponse = (responseData,successHander,failHander)=>{
 //处理失败 老接口N
 const dealWithOldFailResponse = (error,successHander,failHander)=>{
   var msg = "啊哦,貌似网络出了点问题";
+  console.log(error);
   failHander(msg);
 }
 //处理成功 新接口
@@ -170,5 +172,6 @@ const dealWithNewSuccessResponse = (responseData,successHander,failHander)=>{
 //处理失败 新接口
 const dealWithNewFailResponse = (error,successHander,failHander)=>{
   var msg = "啊哦,貌似网络出了点问题";
+  console.log(error);
   failHander(msg);
 }

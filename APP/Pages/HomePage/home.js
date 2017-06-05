@@ -41,7 +41,7 @@ class Home extends Component {
     });
   }
   componentDidMount() {
-    this.requestHomeData();
+    this.requestHomeData();  
   }
   render() {
     return (

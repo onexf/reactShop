@@ -23,13 +23,13 @@ class Home extends Component {
   constructor(props) {
     super(props);
     var ds =new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    iconImgArr = [require('../../Image/homepage_list_1.png'),require('../../Image/homepage_list_2.png'),require('../../Image/homepage_list_3.png'),require('../../Image/homepage_list_4.png')];
     iconTitleArr = ['商城首页','发现','待收货','我的钱包'];    
-    bannerImgArr = ['http://avatar.csdn.net/8/6/0/1_jing85432373.jpg','http://avatar.csdn.net/8/6/0/1_jing85432373.jpg','http://avatar.csdn.net/8/6/0/1_jing85432373.jpg'];
-    findDataArr =[{image:'http://avatar.csdn.net/8/6/0/1_jing85432373.jpg',title:"第一张",price:'12.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.0'},{image:'http://avatar.csdn.net/8/6/0/1_jing85432373.jpg',title:"第二张",price:'12.0'},{image:'http://avatar.csdn.net/8/6/0/1_jing85432373.jpg',title:"第三张",price:'12.0'}];
+    iconImgArr = [require('../../Image/homepage_list_1.png'),require('../../Image/homepage_list_2.png'),require('../../Image/homepage_list_3.png'),require('../../Image/homepage_list_4.png')];
     this.state = {
-      dataSource:ds,
-      activeDataArr :[{image:'http://avatar.csdn.net/8/6/0/1_jing85432373.jpg',title:"第一张",price:'12.0'},{image:'http://avatar.csdn.net/8/6/0/1_jing85432373.jpg',title:"第二张",price:'12.0'},{image:'http://avatar.csdn.net/8/6/0/1_jing85432373.jpg',title:"第三张",price:'12.0'}],
+      dataSource:ds,      
+      bannerImgArr :['http://avatar.csdn.net/8/6/0/1_jing85432373.jpg','http://avatar.csdn.net/8/6/0/1_jing85432373.jpg','http://avatar.csdn.net/8/6/0/1_jing85432373.jpg'],
+      findDataArr : [{image:'http://avatar.csdn.net/8/6/0/1_jing85432373.jpg',title:"第一张",price:'12.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.012.0'},{image:'http://avatar.csdn.net/8/6/0/1_jing85432373.jpg',title:"第二张",price:'12.0'},{image:'http://avatar.csdn.net/8/6/0/1_jing85432373.jpg',title:"第三张",price:'12.0'}],
+      activeDataArr : [{image:'http://avatar.csdn.net/8/6/0/1_jing85432373.jpg',title:"第一张",price:'12.0'},{image:'http://avatar.csdn.net/8/6/0/1_jing85432373.jpg',title:"第二张",price:'12.0'},{image:'http://avatar.csdn.net/8/6/0/1_jing85432373.jpg',title:"第三张",price:'12.0'}],
     }
   }
   requestHomeData (){
@@ -56,8 +56,8 @@ class Home extends Component {
               autoplay={true}
               dot={<View style={styles.doitNormal} />}
               activeDot={<View style={styles.doitSelect} />}
-              paginationStyle={[styles.paginStlye,{marginLeft:ScreenWidth - (bannerImgArr.length * 10 + 15),
-      width:bannerImgArr.length * 10 + 15}]}
+              paginationStyle={[styles.paginStlye,{marginLeft:ScreenWidth - (this.state.bannerImgArr.length * 10 + 15),
+      width:this.state.bannerImgArr.length * 10 + 15}]}
               >
               {this.renderImg()}
             </Swiper>
@@ -119,8 +119,8 @@ class Home extends Component {
 
       creatFindCell(){
         let viewArr = [];
-        for (let i = 0; i < findDataArr.length; i++) {
-          let itemData = findDataArr[i];
+        for (let i = 0; i < this.state.findDataArr.length; i++) {
+          let itemData = this.state.findDataArr[i];
           viewArr.push(
             <View key={i} style={styles.findCell}>
               <Image style={styles.findeImage} source={{uri:itemData['image']}}></Image>
@@ -156,13 +156,13 @@ class Home extends Component {
       
       renderImg(){  
             let imageViews=[];  
-            for(let i=0;i<bannerImgArr.length;i++){  
+            for(let i=0;i<this.state.bannerImgArr.length;i++){  
                 imageViews.push( 
                 <TouchableWithoutFeedback key={i} onPress={()=>{this.itemTouched(i)}}> 
                     <Image  
                         key={i}  
                         style={{flex:1}}  
-                        source={{uri:bannerImgArr[i]}}  
+                        source={{uri:this.state.bannerImgArr[i]}}  
                         />  
                 </TouchableWithoutFeedback>
                 );
